@@ -41,6 +41,8 @@ This does all of those things in ONE button press.
 All you need to do is go to the AnimatedSprite2D, assign a SpriteFrames, select an animation, and click the button once for each animation. EZ-PZ.
 
 
-## About
+## About / License
 
 By Kaiiboraka. Made in Godot 4.5.beta3.mono. Other Godot versions untested.
+
+Licensed under CC0. See `license.md`. I don't care what you do with it, go nuts. Credit me if you like.

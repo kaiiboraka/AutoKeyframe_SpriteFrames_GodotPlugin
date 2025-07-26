@@ -1,4 +1,4 @@
-# <img width="64" height="64" alt="AutoKey_AnimatedSpriteFrames" src="https://github.com/user-attachments/assets/fe46ba5c-8634-4e29-b98f-e9ce766cc400" /> Auto Keyframe SpriteFrames Plugin
+# <img width="48" height="48" alt="AutoKey_AnimatedSpriteFrames" src="addons/AutoKey_SpriteFrames/icon.svg" /> Auto Keyframe SpriteFrames Plugin
 
 ## Functionality Overview
 

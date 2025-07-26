@@ -11,7 +11,7 @@ func _parse_begin(object: Object):
 		return
 
 	var button := Button.new()
-	button.text = "Auto Keyframe All Frames"
+	button.text = "Auto-Key SpriteFrames Animation"
 	button.pressed.connect(_on_auto_keyframe_button_pressed.bind(object))
 	add_custom_control(button)
 

@@ -6,7 +6,7 @@ var inspector_plugin : EditorInspectorPlugin
 func _enter_tree():
 	# Initialization of the plugin goes here.
 	# Add the custom inspector plugin.
-	inspector_plugin = preload("res://addons/KeyAllSpriteFrames/inspector_plugin.gd").new()
+	inspector_plugin = preload("res://addons/AutoKey_SpriteFrames/inspector_plugin.gd").new()
 	inspector_plugin._editor_interface = get_editor_interface()
 	add_inspector_plugin(inspector_plugin)
 	

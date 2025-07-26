@@ -7,8 +7,10 @@ This Godot editor plugin is designed to streamline the process of animating an `
 
 ## How to Use
 
+### Installation
+
 1.  Select an `AnimatedSprite2D` node in the scene tree. 
-		In the Inspector, you will see a new button at the top: **"Auto Keyframe All Frames"**.
+	- In the Inspector, you will see a new button at the top: **"Auto-Key SpriteFrames Animation"**.
 2.  Ensure it has a sibling `AnimationPlayer` node.
 3.  Assign a `SpriteFrames` resource to your `AnimatedSprite2D`.
 4.  Select the animation you want to auto-key in the `Animation` property below `Sprite Frames`.

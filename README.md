@@ -9,6 +9,21 @@ This Godot editor plugin is designed to streamline the process of animating an `
 
 ### Installation
 
+1. Place the `AutoKey_SpriteFrames` folder inside your project's `addons` directory.
+2. Enable the plugin in `Project > Project Settings > Plugins`.
+
+The final file structure should look like this:
+```
+res://addons/AutoKey_SpriteFrames/
+├── AutoKey_SpriteFrames.gd
+├── inspector_plugin.gd
+├── plugin.cfg
+├── license.md
+└── README.md
+```
+
+### Usage
+
 1.  Select an `AnimatedSprite2D` node in the scene tree. 
 	- In the Inspector, you will see a new button at the top: **"Auto-Key SpriteFrames Animation"**.
 2.  Ensure it has a sibling `AnimationPlayer` node.

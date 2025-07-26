@@ -1,15 +1,31 @@
-# Auto Keyframe SpriteFrames Plugin
+## <img width="48" height="48" alt="AutoKey_AnimatedSpriteFrames" src="addons/AutoKey_SpriteFrames/icon.svg" /> Auto-Keyframe `AnimatedSprite2D`'s `SpriteFrames` 
 
+#### *A QOL Plugin for Godot 4.2+*
 
-## Functionality Overview
-
-This Godot editor plugin is designed to streamline the process of animating an `AnimatedSprite2D` node with an `AnimationPlayer`. It eliminates the tedious manual work of keyframing each frame of a sprite animation.
+This Godot editor plugin is designed to streamline the process of animating an `AnimatedSprite2D` node with an `AnimationPlayer`. It reduces the tedious manual work of keyframing each frame of a sprite animation down to a single button-press.
 
 
 ## How to Use
 
+### Installation
+
+1. Place the `AutoKey_SpriteFrames` folder inside your project's `addons` directory.
+2. Enable the plugin in `Project > Project Settings > Plugins`.
+
+The final file structure should look like this:
+```
+res://addons/AutoKey_SpriteFrames/
+├── AutoKey_SpriteFrames.gd
+├── inspector_plugin.gd
+├── plugin.cfg
+├── license.md
+└── README.md
+```
+
+### Usage
+
 1.  Select an `AnimatedSprite2D` node in the scene tree. 
-		In the Inspector, you will see a new button at the top: **"Auto Keyframe All Frames"**.
+	- In the Inspector, you will see a new button at the top: **"Auto-Key SpriteFrames Animation"**.
 2.  Ensure it has a sibling `AnimationPlayer` node.
 3.  Assign a `SpriteFrames` resource to your `AnimatedSprite2D`.
 4.  Select the animation you want to auto-key in the `Animation` property below `Sprite Frames`.
@@ -41,7 +57,7 @@ This does all of those things in ONE button press.
 All you need to do is go to the AnimatedSprite2D, assign a SpriteFrames, select an animation, and click the button once for each animation. EZ-PZ.
 
 
-## About / License
+### About / License
 
 By Kaiiboraka. Made in Godot 4.5.beta3.mono. Other Godot versions untested.
 

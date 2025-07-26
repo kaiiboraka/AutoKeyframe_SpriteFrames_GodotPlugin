@@ -1,4 +1,5 @@
 @tool
+@icon("res://addons/AutoKey_SpriteFrames/icon.svg")
 extends EditorPlugin
 
 var inspector_plugin : EditorInspectorPlugin

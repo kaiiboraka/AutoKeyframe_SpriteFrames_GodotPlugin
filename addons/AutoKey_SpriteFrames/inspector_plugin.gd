@@ -1,4 +1,5 @@
 @tool
+@icon("res://addons/AutoKey_SpriteFrames/icon.svg")
 extends EditorInspectorPlugin
 
 var _editor_interface: EditorInterface
@@ -12,6 +13,7 @@ func _parse_begin(object: Object):
 
 	var button := Button.new()
 	button.text = "Auto-Key SpriteFrames Animation"
+	button.icon = preload("res://addons/AutoKey_SpriteFrames/icon.svg")
 	button.pressed.connect(_on_auto_keyframe_button_pressed.bind(object))
 	add_custom_control(button)
 

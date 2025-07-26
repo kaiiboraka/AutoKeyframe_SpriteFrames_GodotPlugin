@@ -1,8 +1,8 @@
-# <img width="48" height="48" alt="AutoKey_AnimatedSpriteFrames" src="addons/AutoKey_SpriteFrames/icon.svg" /> Auto Keyframe SpriteFrames Plugin
+# <img width="48" height="48" alt="AutoKey_AnimatedSpriteFrames" src="addons/AutoKey_SpriteFrames/icon.svg" /> Auto-Keyframe `AnimatedSprite2D`'s `SpriteFrames` 
 
-## Functionality Overview
+#### *A QOL Plugin for Godot 4.2+*
 
-This Godot editor plugin is designed to streamline the process of animating an `AnimatedSprite2D` node with an `AnimationPlayer`. It eliminates the tedious manual work of keyframing each frame of a sprite animation.
+This Godot editor plugin is designed to streamline the process of animating an `AnimatedSprite2D` node with an `AnimationPlayer`. It reduces the tedious manual work of keyframing each frame of a sprite animation down to a single button-press.
 
 
 ## How to Use

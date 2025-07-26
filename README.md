@@ -1,9 +1,12 @@
 ## <img width="48" height="48" alt="AutoKey_AnimatedSpriteFrames" src="addons/AutoKey_SpriteFrames/icon.svg" /> Auto-Keyframe `AnimatedSprite2D`'s `SpriteFrames` 
 
-#### *A QOL Plugin for Godot 4.2+*
+[![License: CC0-1.0](https://img.shields.io/badge/License-CC0_1.0-lightgrey.svg)](http://creativecommons.org/publicdomain/zero/1.0/)
+<a href="https://godotengine.org/">
+<img src="https://img.shields.io/badge/4.4-white?style=flat-square&logo=godotengine&logoColor=white&label=Godot&labelColor=%232f5069&color=%233e4c57" alt="Godot 4.4" height="20"></a>
 
-This Godot editor plugin is designed to streamline the process of animating an `AnimatedSprite2D` node with an `AnimationPlayer`. It reduces the tedious manual work of keyframing each frame of a sprite animation down to a single button-press.
+#### A QOL Plugin for Godot
 
+This Godot editor plugin is designed to streamline the process of animating an `AnimatedSprite2D` node with an `AnimationPlayer`. It reduces the tedious manual work of keyframing each frame of a sprite animation down to a single button-press. Made in Godot 4.5.beta3.mono. Other Godot versions untested. Almost certain to work in 4.4, oldest I'd say is probably 4.2. If it breaks on an older version, submit an issue.
 
 ## How to Use
 
@@ -59,8 +62,6 @@ This does all of those things in ONE button press.
 All you need to do is go to the AnimatedSprite2D, assign a SpriteFrames, select an animation, and click the button once for each animation. EZ-PZ.
 
 
-### About / License
+### License
 
-By Kaiiboraka. Made in Godot 4.5.beta3.mono. Other Godot versions untested.
-
-Licensed under CC0. See `license.md`. I don't care what you do with it, go nuts. Credit me if you like.
+By Kaiiboraka. Licensed under CC0. See `license.md`. I don't care what you do with it, go nuts. Credit me if you like.

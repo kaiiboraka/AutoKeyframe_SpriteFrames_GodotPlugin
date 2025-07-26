@@ -6,7 +6,9 @@
 
 #### A QOL Plugin for 2D frame-based Animation in Godot
 
-This Godot editor plugin is designed to streamline the process of animating an `AnimatedSprite2D` node with an `AnimationPlayer`. It reduces the tedious manual work of keyframing each frame of a sprite animation down to a single button-press. Made in Godot 4.5.beta3.mono. Other Godot versions untested. Almost certain to work in 4.4, oldest I'd say is probably 4.2. If it breaks on an older version, submit an issue.
+This Godot editor plugin is designed to streamline the process of animating an `AnimatedSprite2D` node with an `AnimationPlayer`. It reduces the tedious manual work of keyframing each frame of a sprite animation down to a single button-press. 
+
+Made in `Godot 4.5 beta3`. Other Godot versions untested. Almost certain to work in 4.4, oldest I'd say is probably 4.2. If it breaks on an older version, submit an issue.
 
 ## How to Use
 

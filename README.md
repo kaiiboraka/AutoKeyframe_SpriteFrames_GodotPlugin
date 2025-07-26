@@ -4,7 +4,7 @@
 <a href="https://godotengine.org/">
 <img src="https://img.shields.io/badge/4.4-white?style=flat-square&logo=godotengine&logoColor=white&label=Godot&labelColor=%232f5069&color=%233e4c57" alt="Godot 4.4" height="20"></a>
 
-#### A QOL Plugin for Godot
+#### A QOL Plugin for 2D frame-based Animation in Godot
 
 This Godot editor plugin is designed to streamline the process of animating an `AnimatedSprite2D` node with an `AnimationPlayer`. It reduces the tedious manual work of keyframing each frame of a sprite animation down to a single button-press. Made in Godot 4.5.beta3.mono. Other Godot versions untested. Almost certain to work in 4.4, oldest I'd say is probably 4.2. If it breaks on an older version, submit an issue.
 

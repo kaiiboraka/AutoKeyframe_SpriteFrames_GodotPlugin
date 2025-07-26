@@ -1,4 +1,4 @@
-# <img width="48" height="48" alt="AutoKey_AnimatedSpriteFrames" src="addons/AutoKey_SpriteFrames/icon.svg" /> Auto-Keyframe `AnimatedSprite2D`'s `SpriteFrames` 
+## <img width="48" height="48" alt="AutoKey_AnimatedSpriteFrames" src="addons/AutoKey_SpriteFrames/icon.svg" /> Auto-Keyframe `AnimatedSprite2D`'s `SpriteFrames` 
 
 #### *A QOL Plugin for Godot 4.2+*
 
@@ -40,7 +40,7 @@ This does all of those things in ONE button press.
 All you need to do is go to the AnimatedSprite2D, assign a SpriteFrames, select an animation, and click the button once for each animation. EZ-PZ.
 
 
-## About / License
+### About / License
 
 By Kaiiboraka. Made in Godot 4.5.beta3.mono. Other Godot versions untested.
 

@@ -36,14 +36,14 @@ res://addons/AutoKey_SpriteFrames/
 
 When the button is clicked, the plugin will:
 
-*   Find the sibling `AnimationPlayer`.
-*   Get the current animation name from the `AnimatedSprite2D` (e.g., "walk").
-*   Create a new `Animation` resource in the `AnimationPlayer` with that name, or find an existing one.
-*   **Automatically generate two tracks:**
-	1.   `AnimatedSprite2D:animation`: Sets the current animation name at time `0.0`.
-	2.   `AnimatedSprite2D:frame`: Creates a keyframe for every single frame of the animation in the `SpriteFrames` resource. The timing of these keyframes is based on the FPS (step) set in the `AnimationPlayer`'s animation timeline.
-*   WARNING: This will clear all existing frames of the above-mentioned tracks.
-*   Set the total length of the animation (in frames) to match the sprite animation's duration.
+1.   Find the sibling `AnimationPlayer`.
+2.   Get the current animation name from the `AnimatedSprite2D` (e.g., "walk").
+3.   Create a new `Animation` resource in the `AnimationPlayer` with that name, or find an existing one.
+4.   **Automatically generate two tracks:**
+		i.   `AnimatedSprite2D:animation`: Sets the current animation name at time `0.0`.
+		ii.   `AnimatedSprite2D:frame`: Creates a keyframe for every single frame of the animation in the `SpriteFrames` resource. The timing of these keyframes is based on the FPS (step) set in the `AnimationPlayer`'s animation timeline.
+		*   **WARNING**: This will clear all existing frames of the above-mentioned tracks.
+5.   Set the total length of the animation (in frames) to match the sprite animation's duration.
 
 This allows you to instantly create a perfectly timed `AnimationPlayer` animation from your `SpriteFrames` with a single click.
 

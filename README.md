@@ -24,9 +24,7 @@ res://addons/AutoKey_SpriteFrames/
 
 ### Usage
 
-![alt text][screenshot]
-
-[screenshot]: Button_screenshot.png "Custom button screenshot"
+<img alt="Custom Button screenshot" src="Button_screenshot.png" />
 
 1.  Select an `AnimatedSprite2D` node in the scene tree. 
 	- In the Inspector, you will see a new button at the top: **"Auto-Key SpriteFrames Animation"**.

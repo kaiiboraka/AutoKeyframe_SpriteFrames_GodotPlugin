@@ -34,8 +34,9 @@ res://addons/AutoKey_SpriteFrames/
 5.  Set the desired **Framerate**.
 6.  Click the button.
 
-
 ### Settings
+
+<img alt="Updated screenshot" src="Update_V1.1_screenshot.png" />
 
 Plugin settings live in **Project Settings > Addons > auto_key_sprite_frames**:
 
@@ -70,7 +71,7 @@ I was getting really fed up with the tedium of finding the AnimatedSprite, click
 
 This does all of those things in ONE button press. 
 
-All you need to do is go to the AnimatedSprite, assign a SpriteFrames, select an animation, and click the button once for each animation. EZ-PZ.
+All you need to do is go to the AnimatedSprite, assign a SpriteFrames, select an animation, and click the button for each or every animation. EZ-PZ.
 
 
 ### About / License

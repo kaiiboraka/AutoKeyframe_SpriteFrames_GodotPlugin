@@ -61,17 +61,20 @@ When the button is clicked, the plugin will:
 This allows you to instantly create a perfectly timed `AnimationPlayer` animation from your `SpriteFrames` with a single click.
 
 
-## Why
+## About
 
-I was getting really fed up with the tedium of finding the AnimatedSprite, clicking on the Animation tab, creating new animation, key "animation", click yes to the dialog, and then key every single frame (however long it is) by carpal-tunneling myself to tears going back and forth between clicking the little up-arrow on the frame, and the key next to it, over and over and over.
+By Kaiiboraka. Made in Godot 4.2, updated in 4.5 and in 4.8. Other Godot versions not thoroughly tested.  
+Original plugin on the old Godot Asset Library: https://godotengine.org/asset-library/asset/4186
+New link to plugin on new Godot Asset Store: https://store.godotengine.org/asset/kaiiboraka/auto-keyframe-animatedsprite/
 
-This does all of those things in ONE button press. 
+### Why
 
-All you need to do is go to the AnimatedSprite, assign a SpriteFrames, select an animation, and click the button for each or every animation. EZ-PZ.
+I was getting really fed up with the tedium of finding the **AnimatedSprite**, clicking on the **Animation** window, creating a new animation, key the "animation" property on the **SpriteFrames**, click yes to the dialog, and then keying every single frame (however long it is) by carpal-tunneling myself to tears going back and forth between clicking the little up-arrow on the frame, and the key next to it, over and over and over.
 
+This does all of those things in ONE button press.
 
-### About / License
+All you need to do is go to the **AnimatedSprite**, assign a **SpriteFrames**, select an animation, and click the button for each or every animation. EZ-PZ.
 
-By Kaiiboraka. Made in Godot 4.5.beta3.mono. Other Godot versions untested.
+### License
 
 Licensed under CC0. See `license.md`. I don't care what you do with it, go nuts. Credit me if you like.

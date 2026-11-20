@@ -64,7 +64,7 @@ This allows you to instantly create a perfectly timed `AnimationPlayer` animatio
 ## About
 
 By Kaiiboraka. Made in Godot 4.2, updated in 4.5 and in 4.8. Other Godot versions not thoroughly tested.  
-Original plugin on the old Godot Asset Library: https://godotengine.org/asset-library/asset/4186
+Original plugin on the old Godot Asset Library: https://godotengine.org/asset-library/asset/4186    
 New link to plugin on new Godot Asset Store: https://store.godotengine.org/asset/kaiiboraka/auto-keyframe-animatedsprite/
 
 ### Why

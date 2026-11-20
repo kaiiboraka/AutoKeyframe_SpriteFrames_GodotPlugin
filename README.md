@@ -34,8 +34,9 @@ res://addons/AutoKey_SpriteFrames/
 5.  Set the desired **Framerate**.
 6.  Click the button.
 
-
 ### Settings
+
+<img alt="Updated screenshot" src="Update_V1.1_screenshot.png" />
 
 Plugin settings live in **Project Settings > Addons > auto_key_sprite_frames**:
 

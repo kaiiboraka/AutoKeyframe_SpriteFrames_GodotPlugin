@@ -1,4 +1,4 @@
-## <img width="48" height="48" alt="AutoKey_AnimatedSpriteFrames" src="addons/AutoKey_SpriteFrames/icon.svg" /> Auto-Keyframe `AnimatedSprite2D` / `AnimatedSprite3D`'s `SpriteFrames` 
+## Auto-Keyframe `AnimatedSprite2D` / `AnimatedSprite3D`'s `SpriteFrames` 
 
 #### *A QOL Plugin for Godot 4.2+*
 

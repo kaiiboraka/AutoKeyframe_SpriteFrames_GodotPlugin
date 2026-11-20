@@ -24,7 +24,7 @@ res://addons/AutoKey_SpriteFrames/
 
 ### Usage
 
-<img alt="Custom Button screenshot" src="Button_screenshot.png" />
+<img alt="Custom Button screenshot" src="assets/Button_screenshot.png" />
 
 1.  Select an `AnimatedSprite2D` or `AnimatedSprite3D` node in the scene tree. 
 	- The Inspector shows **Auto-Key CURRENT Animation**, optionally **Auto-Key ALL Animations** and **Export Animations To Files**, plus a **Framerate** field.
@@ -36,7 +36,7 @@ res://addons/AutoKey_SpriteFrames/
 
 ### Settings
 
-<img alt="Updated screenshot" src="Update_V1.1_screenshot.png" />
+<img alt="Updated screenshot" src="assets/Update_V1.1_screenshot.png" />
 
 Plugin settings live in **Project Settings > Addons > auto_key_sprite_frames**:
 

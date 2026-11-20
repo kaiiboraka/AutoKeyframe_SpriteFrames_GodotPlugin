@@ -27,11 +27,25 @@ res://addons/AutoKey_SpriteFrames/
 <img alt="Custom Button screenshot" src="Button_screenshot.png" />
 
 1.  Select an `AnimatedSprite2D` or `AnimatedSprite3D` node in the scene tree. 
-	- In the Inspector, you will see a new button at the top: **"Auto-Key SpriteFrames Animation"**.
+	- The Inspector shows **Auto-Key CURRENT Animation**, optionally **Auto-Key ALL Animations** and **Export Animations To Files**, plus a **Framerate** field.
 2.  Ensure it has a sibling `AnimationPlayer` node.
 3.  Assign a `SpriteFrames` resource to your animated sprite.
 4.  Select the animation you want to auto-key in the `Animation` property below `Sprite Frames`.
-5.  Click the button.
+5.  Set the desired **Framerate**.
+6.  Click the button.
+
+
+### Settings
+
+Plugin settings live in **Project Settings > Addons > auto_key_sprite_frames**:
+
+| Setting | Default | Description |
+| --- | --- | --- |
+| `show_all_animations_button` | `true` | Shows the **Auto-Key ALL Animations** button. |
+| `show_export_button` | `true` | Shows the **Export Animations To Files** button. |
+| `default_framerate` | `16` | Starting value for the Inspector's **Framerate** field. |
+
+The Inspector's **Framerate** field controls the FPS used for the generated keyframes. It is an override for the next operation and is not written back to the plugin settings.
 
 
 ## What It Does
@@ -43,9 +57,9 @@ When the button is clicked, the plugin will:
 3.   Create a new `Animation` resource in the `AnimationPlayer` with that name, or find an existing one.
 4.   **Automatically generate two tracks:**
 		i.   `<SpriteNode>:animation`: Sets the current animation name at time `0.0`.
-		ii.   `<SpriteNode>:frame`: Creates a keyframe for every single frame of the animation in the `SpriteFrames` resource. The timing of these keyframes is based on the FPS (step) set in the `AnimationPlayer`'s animation timeline.
+		ii.   `<SpriteNode>:frame`: Creates a keyframe for every single frame of the animation in the `SpriteFrames` resource. The timing of these keyframes is based on the Inspector's **Framerate** field.
 		*   **WARNING**: This will clear all existing frames of the above-mentioned tracks.
-5.   Set the total length of the animation (in frames) to match the sprite animation's duration.
+5.   Set the animation's step (timeline FPS) to the selected framerate, and set the total length to match the sprite animation's duration.
 
 This allows you to instantly create a perfectly timed `AnimationPlayer` animation from your `SpriteFrames` with a single click.
 

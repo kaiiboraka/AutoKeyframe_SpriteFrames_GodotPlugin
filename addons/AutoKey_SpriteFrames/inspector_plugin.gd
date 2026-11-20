@@ -5,90 +5,150 @@ extends EditorInspectorPlugin
 var _editor_interface: EditorInterface
 
 func _can_handle(object: Object) -> bool:
-	return object is AnimatedSprite2D
+	return _is_animated_sprite(object)
+
+func _is_animated_sprite(object: Object) -> bool:
+	return object is AnimatedSprite2D or object is AnimatedSprite3D
+
+func _get_sprite_frames(animated_sprite: Node) -> SpriteFrames:
+	if animated_sprite is AnimatedSprite2D:
+		return (animated_sprite as AnimatedSprite2D).sprite_frames
+	if animated_sprite is AnimatedSprite3D:
+		return (animated_sprite as AnimatedSprite3D).sprite_frames
+	return null
+
+func _get_current_animation(animated_sprite: Node) -> StringName:
+	if animated_sprite is AnimatedSprite2D:
+		return (animated_sprite as AnimatedSprite2D).animation
+	if animated_sprite is AnimatedSprite3D:
+		return (animated_sprite as AnimatedSprite3D).animation
+	return &""
 
 func _parse_begin(object: Object):
-	if not (object is AnimatedSprite2D):
+	if not _is_animated_sprite(object):
 		return
 
-	var button := Button.new()
-	button.text = "Auto-Key SpriteFrames Animation"
-	button.icon = preload("res://addons/AutoKey_SpriteFrames/icon.svg")
-	button.pressed.connect(_on_auto_keyframe_button_pressed.bind(object))
-	add_custom_control(button)
+	var current_button := Button.new()
+	current_button.text = "Auto-Key CURRENT Animation"
+	current_button.icon = preload("res://addons/AutoKey_SpriteFrames/icon.svg")
+	current_button.pressed.connect(_on_auto_key_current_button_pressed.bind(object))
+	add_custom_control(current_button)
 
-func _on_auto_keyframe_button_pressed(animated_sprite: AnimatedSprite2D):
-	# --- 1. Get all necessary objects and data ---
-	if not is_instance_valid(animated_sprite):
-		push_error("AnimatedSprite2D instance is not valid.")
+	var theme = _editor_interface.get_editor_theme();
+	
+	var all_button := Button.new()
+	all_button.text = "Auto-Key ALL Animations"
+	all_button.icon = theme.get_icon("AnimationPlayer", "EditorIcons")
+	all_button.pressed.connect(_on_auto_key_all_button_pressed.bind(object))
+	add_custom_control(all_button)
+
+	var export_button := Button.new()
+	export_button.text = "Export Animations To Files"
+	export_button.icon = theme.get_icon("AnimationLibrary", "EditorIcons")
+	export_button.pressed.connect(_on_export_animations_pressed.bind(object))
+	add_custom_control(export_button)
+
+func _on_auto_key_current_button_pressed(animated_sprite: Node):
+	var anim_name: StringName = _get_current_animation(animated_sprite)
+	if anim_name.is_empty():
+		_show_warning_dialog("No animation selected in %s." % animated_sprite.get_class())
 		return
+	
+	var undo_redo: EditorUndoRedoManager = _editor_interface.get_editor_undo_redo()
+	undo_redo.create_action("Auto Keyframe Current Animation")
+	_generate_keyframes_for_animation(animated_sprite, anim_name, undo_redo)
+	undo_redo.commit_action()
+	_show_warning_dialog("Keyframes generated for '%s'." % anim_name, "Success")
 
-	var sprite_frames: SpriteFrames = animated_sprite.sprite_frames
+func _on_auto_key_all_button_pressed(animated_sprite: Node):
+	var sprite_frames: SpriteFrames = _get_sprite_frames(animated_sprite)
 	if not sprite_frames:
 		_show_warning_dialog("No SpriteFrames resource assigned.")
 		return
 
-	var anim_name: StringName = animated_sprite.animation
-	if anim_name.is_empty() or not sprite_frames.has_animation(anim_name):
-		_show_warning_dialog("No animation selected in AnimatedSprite2D.")
+	var undo_redo: EditorUndoRedoManager = _editor_interface.get_editor_undo_redo()
+	undo_redo.create_action("Auto Keyframe ALL Animations")
+
+	var all_anims = sprite_frames.get_animation_names()
+	for anim_name in all_anims:
+		_generate_keyframes_for_animation(animated_sprite, anim_name, undo_redo)
+	
+	undo_redo.commit_action()
+	_show_warning_dialog("Keyframes generated for %s animations." % all_anims.size(), "Success")
+
+func _generate_keyframes_for_animation(animated_sprite: Node, anim_name: StringName, undo_redo: EditorUndoRedoManager):
+	# --- 1. Get objects and data ---
+	if not is_instance_valid(animated_sprite):
+		push_error("Animated sprite instance is not valid.")
+		return
+
+	var sprite_frames: SpriteFrames = _get_sprite_frames(animated_sprite)
+	if not sprite_frames or not sprite_frames.has_animation(anim_name):
 		return
 
 	var anim_player: AnimationPlayer = animated_sprite.get_parent().find_child("AnimationPlayer", true, false)
 	if not anim_player:
 		anim_player = _editor_interface.get_edited_scene_root().find_child("AnimationPlayer", true, false)
 	if not anim_player:
-		_show_warning_dialog("No AnimationPlayer node found.")
-		return
+		return # Silently fail if no player, as the dialog would be annoying for every anim
 
 	var frame_count: int = sprite_frames.get_frame_count(anim_name)
 
 	# --- 2. Get or create the Animation resource ---
-	var library: AnimationLibrary = anim_player.get_animation_library("") # Get default library
+	var library: AnimationLibrary = anim_player.get_animation_library("")
 	if not library:
 		library = AnimationLibrary.new()
-		anim_player.add_animation_library("", library)
+		# Use undo_redo to add the library so it can be undone
+		undo_redo.add_do_method(anim_player, "add_animation_library", "", library)
+		undo_redo.add_undo_method(anim_player, "remove_animation_library", "")
 
 	var animation: Animation
 	if library.has_animation(anim_name):
 		animation = library.get_animation(anim_name)
 	else:
 		animation = Animation.new()
-		library.add_animation(anim_name, animation)
+		undo_redo.add_do_method(library, "add_animation", anim_name, animation)
+		undo_redo.add_undo_method(library, "remove_animation", anim_name)
 
 	# --- 3. Use the Animation's own step/FPS value ---
 	var time_step = animation.step
 	if time_step <= 0:
-		time_step = 1.0 / 12.0 # Default to 12 FPS if not set
+		time_step = 1.0 / 12.0
 
-	# --- 4. Define the track paths ---
+	# --- 4. Define track paths ---
+	#var node_path_to_sprite = anim_player.get_path_to(animated_sprite)
 	var node_path_to_sprite = NodePath(animated_sprite.name)
 	var anim_track_path = "%s:animation" % node_path_to_sprite
 	var frame_track_path = "%s:frame" % node_path_to_sprite
 
-	# --- 5. Find or create tracks and CLEAR them directly ---
+	# --- 5. Find or create tracks and clear them ---
 	var anim_track_idx = animation.find_track(anim_track_path, Animation.TYPE_VALUE)
 	if anim_track_idx == -1:
 		anim_track_idx = animation.add_track(Animation.TYPE_VALUE)
-		animation.track_set_path(anim_track_idx, anim_track_path)
+		undo_redo.add_do_method(animation, "track_set_path", anim_track_idx, anim_track_path)
+		# No undo needed for add_track, it's part of the whole action
 	else:
-		# Correct way to clear: loop backwards and remove each key
-		for i in range(animation.track_get_key_count(anim_track_idx) - 1, -1, -1):
-			animation.track_remove_key(anim_track_idx, i)
-	
+		# Clear existing keys
+		var key_count = animation.track_get_key_count(anim_track_idx)
+		for i in range(key_count - 1, -1, -1):
+			var key_time = animation.track_get_key_time(anim_track_idx, i)
+			var key_value = animation.track_get_key_value(anim_track_idx, i)
+			undo_redo.add_do_method(animation, "track_remove_key", anim_track_idx, 0)
+			undo_redo.add_undo_method(animation, "track_insert_key", anim_track_idx, key_time, key_value)
+
 	var frame_track_idx = animation.find_track(frame_track_path, Animation.TYPE_VALUE)
 	if frame_track_idx == -1:
 		frame_track_idx = animation.add_track(Animation.TYPE_VALUE)
-		animation.track_set_path(frame_track_idx, frame_track_path)
+		undo_redo.add_do_method(animation, "track_set_path", frame_track_idx, frame_track_path)
 	else:
-		# Correct way to clear: loop backwards and remove each key
-		for i in range(animation.track_get_key_count(frame_track_idx) - 1, -1, -1):
-			animation.track_remove_key(frame_track_idx, i)
+		var key_count = animation.track_get_key_count(frame_track_idx)
+		for i in range(key_count - 1, -1, -1):
+			var key_time = animation.track_get_key_time(frame_track_idx, i)
+			var key_value = animation.track_get_key_value(frame_track_idx, i)
+			undo_redo.add_do_method(animation, "track_remove_key", frame_track_idx, 0)
+			undo_redo.add_undo_method(animation, "track_insert_key", frame_track_idx, key_time, key_value)
 
-	# --- 6. Set up UndoRedo for the CREATION of new keys ---
-	var undo_redo: EditorUndoRedoManager = _editor_interface.get_editor_undo_redo()
-	undo_redo.create_action("Auto Keyframe SpriteFrames")
-
-	# --- 7. Queue all modifications for the transaction ---
+	# --- 6. Add new keys ---
 	undo_redo.add_do_method(animation, "track_set_interpolation_type", anim_track_idx, Animation.INTERPOLATION_NEAREST)
 	undo_redo.add_do_method(animation, "track_set_interpolation_type", frame_track_idx, Animation.INTERPOLATION_NEAREST)
 
@@ -102,9 +162,99 @@ func _on_auto_keyframe_button_pressed(animated_sprite: AnimatedSprite2D):
 	undo_redo.add_do_method(animation, "set_length", total_length)
 	undo_redo.add_do_method(animation, "set_step", time_step)
 
-	# --- 8. Commit the action and notify user ---
+func _on_export_animations_pressed(animated_sprite: Node):
+	# --- 1. Get objects and data ---
+	if not is_instance_valid(animated_sprite):
+		push_error("Animated sprite instance is not valid.")
+		return
+
+	var sprite_frames: SpriteFrames = _get_sprite_frames(animated_sprite)
+	if not sprite_frames or sprite_frames.resource_path.is_empty():
+		_show_warning_dialog("SpriteFrames resource must be saved to disk first.")
+		return
+
+	var anim_player: AnimationPlayer = animated_sprite.get_parent().find_child("AnimationPlayer", true, false)
+	if not anim_player:
+		anim_player = _editor_interface.get_edited_scene_root().find_child("AnimationPlayer", true, false)
+	if not anim_player:
+		_show_warning_dialog("No AnimationPlayer node found.")
+		return
+
+	var scene_root = _editor_interface.get_edited_scene_root()
+	if not scene_root:
+		_show_warning_dialog("Could not get the edited scene root.")
+		return
+	var scene_root_name = scene_root.name
+
+	# --- 2. Determine paths ---
+	var animations_dir = sprite_frames.resource_path.get_base_dir().path_join("Animations")
+	var error = DirAccess.make_dir_recursive_absolute(animations_dir)
+	if error != OK:
+		_show_warning_dialog("Could not create directory: %s" % animations_dir)
+		return
+
+	# --- 3. Find or create the target AnimationLibrary ---
+	var library_info = _find_or_create_animation_library(animations_dir, scene_root_name)
+	var target_library: AnimationLibrary = library_info.library
+	var target_library_path: String = library_info.path
+
+	# --- 4. Export animations ---
+	var undo_redo: EditorUndoRedoManager = _editor_interface.get_editor_undo_redo()
+	undo_redo.create_action("Export Animations and Update Library")
+
+	var animations_exported_count = 0
+	for lib_name in anim_player.get_animation_library_list():
+		var source_library = anim_player.get_animation_library(lib_name)
+		for anim_name in source_library.get_animation_list():
+			if anim_name == "RESET":
+				continue
+				
+			var animation: Animation = source_library.get_animation(anim_name)
+			if not animation: continue
+
+			var anim_path = animations_dir.path_join("%s_%s.res" % [scene_root_name, anim_name])
+			
+			var save_error = ResourceSaver.save(animation, anim_path)
+			if save_error != OK:
+				push_error("Failed to save animation '%s' to '%s'" % [anim_name, anim_path])
+				continue
+			
+			var saved_anim_resource = load(anim_path)
+			undo_redo.add_do_method(target_library, "add_animation", anim_name, saved_anim_resource)
+			# A simple undo is to just remove the animation if it's new.
+			if not target_library.has_animation(anim_name):
+				undo_redo.add_undo_method(target_library, "remove_animation", anim_name)
+
+			animations_exported_count += 1
+
+	# --- 5. Save the target AnimationLibrary ---
+	var lib_save_error = ResourceSaver.save(target_library, target_library_path)
+	if lib_save_error != OK:
+		undo_redo.commit_action() # Commit what we have
+		_show_warning_dialog("Failed to save the final AnimationLibrary at '%s'" % target_library_path)
+		return
+
 	undo_redo.commit_action()
-	_show_warning_dialog("Keyframes generated for '%s'." % anim_name, "Success")
+	_show_warning_dialog("Successfully exported %s animations to '%s' and updated the AnimationLibrary." % [animations_exported_count, animations_dir], "Success")
+
+func _find_or_create_animation_library(directory: String, scene_name: String) -> Dictionary:
+	var dir = DirAccess.open(directory)
+	if dir:
+		dir.list_dir_begin()
+		var file_name = dir.get_next()
+		while file_name != "":
+			if not dir.current_is_dir():
+				if file_name.begins_with("AL_") or file_name.begins_with("AnimationLibrary_") or file_name.begins_with("AnimLibrary_"):
+					var path = directory.path_join(file_name)
+					var lib = load(path)
+					if lib is AnimationLibrary:
+						return {"library": lib, "path": path}
+			file_name = dir.get_next()
+
+	# If we got here, no library was found. Create a new one.
+	var new_lib = AnimationLibrary.new()
+	var new_path = directory.path_join("AL_%s.res" % scene_name)
+	return {"library": new_lib, "path": new_path}
 
 func _show_warning_dialog(text: String, title: String = "Warning"):
 	var dialog := AcceptDialog.new()

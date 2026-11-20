@@ -1,8 +1,8 @@
-## <img width="48" height="48" alt="AutoKey_AnimatedSpriteFrames" src="addons/AutoKey_SpriteFrames/icon.svg" /> Auto-Keyframe `AnimatedSprite2D`'s `SpriteFrames` 
+## <img width="48" height="48" alt="AutoKey_AnimatedSpriteFrames" src="addons/AutoKey_SpriteFrames/icon.svg" /> Auto-Keyframe `AnimatedSprite2D` / `AnimatedSprite3D`'s `SpriteFrames` 
 
 #### *A QOL Plugin for Godot 4.2+*
 
-This Godot editor plugin is designed to streamline the process of animating an `AnimatedSprite2D` node with an `AnimationPlayer`. It reduces the tedious manual work of keyframing each frame of a sprite animation down to a single button-press.
+This Godot editor plugin is designed to streamline the process of animating an `AnimatedSprite2D` or `AnimatedSprite3D` node with an `AnimationPlayer`. It reduces the tedious manual work of keyframing each frame of a sprite animation down to a single button-press.
 
 
 ## How to Use
@@ -26,10 +26,10 @@ res://addons/AutoKey_SpriteFrames/
 
 <img alt="Custom Button screenshot" src="Button_screenshot.png" />
 
-1.  Select an `AnimatedSprite2D` node in the scene tree. 
+1.  Select an `AnimatedSprite2D` or `AnimatedSprite3D` node in the scene tree. 
 	- In the Inspector, you will see a new button at the top: **"Auto-Key SpriteFrames Animation"**.
 2.  Ensure it has a sibling `AnimationPlayer` node.
-3.  Assign a `SpriteFrames` resource to your `AnimatedSprite2D`.
+3.  Assign a `SpriteFrames` resource to your animated sprite.
 4.  Select the animation you want to auto-key in the `Animation` property below `Sprite Frames`.
 5.  Click the button.
 
@@ -39,11 +39,11 @@ res://addons/AutoKey_SpriteFrames/
 When the button is clicked, the plugin will:
 
 1.   Find the sibling `AnimationPlayer`.
-2.   Get the current animation name from the `AnimatedSprite2D` (e.g., "walk").
+2.   Get the current animation name from the animated sprite (e.g., "walk").
 3.   Create a new `Animation` resource in the `AnimationPlayer` with that name, or find an existing one.
 4.   **Automatically generate two tracks:**
-		i.   `AnimatedSprite2D:animation`: Sets the current animation name at time `0.0`.
-		ii.   `AnimatedSprite2D:frame`: Creates a keyframe for every single frame of the animation in the `SpriteFrames` resource. The timing of these keyframes is based on the FPS (step) set in the `AnimationPlayer`'s animation timeline.
+		i.   `<SpriteNode>:animation`: Sets the current animation name at time `0.0`.
+		ii.   `<SpriteNode>:frame`: Creates a keyframe for every single frame of the animation in the `SpriteFrames` resource. The timing of these keyframes is based on the FPS (step) set in the `AnimationPlayer`'s animation timeline.
 		*   **WARNING**: This will clear all existing frames of the above-mentioned tracks.
 5.   Set the total length of the animation (in frames) to match the sprite animation's duration.
 
@@ -52,11 +52,11 @@ This allows you to instantly create a perfectly timed `AnimationPlayer` animatio
 
 ## Why
 
-I was getting really fed up with the tedium of finding the AnimatedSprite2D, clicking on the Animation tab, creating new animation, key "animation", click yes to the dialog, and then key every single frame (however long it is) by carpal-tunneling myself to tears going back and forth between clicking the little up-arrow on the frame, and the key next to it, over and over and over.
+I was getting really fed up with the tedium of finding the AnimatedSprite, clicking on the Animation tab, creating new animation, key "animation", click yes to the dialog, and then key every single frame (however long it is) by carpal-tunneling myself to tears going back and forth between clicking the little up-arrow on the frame, and the key next to it, over and over and over.
 
 This does all of those things in ONE button press. 
 
-All you need to do is go to the AnimatedSprite2D, assign a SpriteFrames, select an animation, and click the button once for each animation. EZ-PZ.
+All you need to do is go to the AnimatedSprite, assign a SpriteFrames, select an animation, and click the button once for each animation. EZ-PZ.
 
 
 ### About / License

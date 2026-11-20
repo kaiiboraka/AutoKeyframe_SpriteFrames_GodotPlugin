@@ -71,7 +71,7 @@ I was getting really fed up with the tedium of finding the AnimatedSprite, click
 
 This does all of those things in ONE button press. 
 
-All you need to do is go to the AnimatedSprite, assign a SpriteFrames, select an animation, and click the button once for each animation. EZ-PZ.
+All you need to do is go to the AnimatedSprite, assign a SpriteFrames, select an animation, and click the button for each or every animation. EZ-PZ.
 
 
 ### About / License

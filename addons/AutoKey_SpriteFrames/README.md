@@ -24,8 +24,6 @@ res://addons/AutoKey_SpriteFrames/
 
 ### Usage
 
-<img alt="Custom Button screenshot" src="Button_screenshot.png" />
-
 1.  Select an `AnimatedSprite2D` or `AnimatedSprite3D` node in the scene tree. 
 	- The Inspector shows **Auto-Key CURRENT Animation**, optionally **Auto-Key ALL Animations** and **Export Animations To Files**, plus a **Framerate** field.
 2.  Ensure it has a sibling `AnimationPlayer` node.
@@ -33,7 +31,6 @@ res://addons/AutoKey_SpriteFrames/
 4.  Select the animation you want to auto-key in the `Animation` property below `Sprite Frames`.
 5.  Set the desired **Framerate**.
 6.  Click the button.
-
 
 ### Settings
 
@@ -70,7 +67,7 @@ I was getting really fed up with the tedium of finding the AnimatedSprite, click
 
 This does all of those things in ONE button press. 
 
-All you need to do is go to the AnimatedSprite, assign a SpriteFrames, select an animation, and click the button once for each animation. EZ-PZ.
+All you need to do is go to the AnimatedSprite, assign a SpriteFrames, select an animation, and click the button for each or every animation. EZ-PZ.
 
 
 ### About / License
